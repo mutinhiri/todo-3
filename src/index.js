@@ -22,7 +22,7 @@ class ToDo {
  
  
  // Add items to UI
- function populateList() {
+ function addtoList() {
    const todoList = document.getElementById('todo-list');
    todoList.innerHTML = '';
  
@@ -61,18 +61,11 @@ class ToDo {
      });
  
      textInput.addEventListener('keydown', (e) => {
-       // Follow value
        text.innerHTML = textInput.value;
- 
-       // Update list
        const index = parseInt(listItem.id, 10);
        ToDo.list[index].description = text.innerHTML;
- 
-       // Update local storage
        localStorage.setItem('todoList', JSON.stringify(ToDo.list));
- 
        if (e.code === 'Enter') {
-         // Update UI
          text.style.display = 'block';
          textInput.classList.toggle('edit-item');
        }
@@ -80,15 +73,11 @@ class ToDo {
  
      // Delete functionality
      deleteButton.addEventListener('click', () => {
-       // Update list
        const index = parseInt(listItem.id, 10);
        ToDo.list = ToDo.list.filter((item) => item !== ToDo.list[index]);
-       // Update indexes
        ToDo.list.forEach((item, i) => { item.index = i; });
-       // Update local storage
        localStorage.setItem('todoList', JSON.stringify(ToDo.list));
-       // Update UI
-       populateList();
+       addtoList();
      });
  
      if (item.complete) {
@@ -101,28 +90,19 @@ class ToDo {
  // Add functionality
  function add(e) {
    if (e.code === 'Enter') {
-     // Create new item
      const newItem = new ToDo(this.value, false);
- 
-     // Update local storage
      localStorage.setItem('todoList', JSON.stringify(newItem.getList()));
- 
-     // Update UI
      this.value = '';
-     populateList();
+     addtoList();
    }
  }
  
  // Clear completed functionality
  function deleteAllCompleted() {
-   // Update list
    ToDo.list = ToDo.list.filter((item) => item.complete === false);
-   // Update indexes
    ToDo.list.forEach((item, i) => { item.index = i; });
-   // Update local storage
    localStorage.setItem('todoList', JSON.stringify(ToDo.list));
-   // Update UI
-   populateList();
+   addtoList();
  }
  
  // Window load
@@ -135,10 +115,7 @@ class ToDo {
  const addInput = document.getElementById('add-input');
  addInput.addEventListener('keydown', add);
  
- // Delete all completed
  const clearButton = document.getElementById('clear-btn');
  clearButton.addEventListener('click', deleteAllCompleted);
- 
- // Populate UI
- populateList();
+ addtoList();
  
