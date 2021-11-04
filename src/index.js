@@ -1,3 +1,3 @@
-import './style.css'
+import './style.css';
 
-import './functions'
+import './functions.js';
