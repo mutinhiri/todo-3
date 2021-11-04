@@ -17,12 +17,12 @@ class ToDo {
     }
   }
 }
- 
+
 // Add items to UI
 function addtoList() {
   const todoList = document.getElementById('todo-list');
   todoList.innerHTML = '';
- 
+
   ToDo.list.forEach((item) => {
     const listItem = document.createElement('li');
     listItem.setAttribute('id', item.index);
@@ -50,7 +50,7 @@ function addtoList() {
       textInput.classList.toggle('complete');
       localStorage.setItem('todoList', JSON.stringify(ToDo.list));
     });
- 
+
     // Edit functionality
     text.addEventListener('click', () => {
       text.style.display = 'none';
@@ -67,7 +67,7 @@ function addtoList() {
         textInput.classList.toggle('edit-item');
       }
     });
- 
+
     // Delete functionality
     deleteButton.addEventListener('click', () => {
       const index = parseInt(listItem.id, 10);
@@ -76,43 +76,43 @@ function addtoList() {
       localStorage.setItem('todoList', JSON.stringify(ToDo.list));
       addtoList();
     });
- 
+
     if (item.complete) {
       checkbox.checked = true;
       text.classList = 'complete';
     }
   });
 }
- 
- // Add functionality
- function add(e) {
-   if (e.code === 'Enter') {
-     const newItem = new ToDo(this.value, false);
-     localStorage.setItem('todoList', JSON.stringify(newItem.getList()));
-     this.value = '';
-     addtoList();
-   }
- }
- 
- // Clear completed functionality
- function deleteAllCompleted() {
-   ToDo.list = ToDo.list.filter((item) => item.complete === false);
-   ToDo.list.forEach((item, i) => { item.index = i; });
-   localStorage.setItem('todoList', JSON.stringify(ToDo.list));
-   addtoList();
- }
- 
- // Window load
- const list = JSON.parse(localStorage.getItem('todoList'));
- if (list) {
-   list.forEach((item) => new ToDo(item.description, item.complete));
- }
- 
- // Add
- const addInput = document.getElementById('add-input');
- addInput.addEventListener('keydown', add);
- 
- const clearButton = document.getElementById('clear-btn');
- clearButton.addEventListener('click', deleteAllCompleted);
- addtoList();
+
+// Add functionality
+function add(e) {
+  if (e.code === 'Enter') {
+    const newItem = new ToDo(this.value, false);
+    localStorage.setItem('todoList', JSON.stringify(newItem.getList()));
+    this.value = '';
+    addtoList();
+  }
+}
+
+// Clear completed functionality
+function deleteAllCompleted() {
+  ToDo.list = ToDo.list.filter((item) => item.complete === false);
+  ToDo.list.forEach((item, i) => { item.index = i; });
+  localStorage.setItem('todoList', JSON.stringify(ToDo.list));
+  addtoList();
+}
+
+// Window load
+const list = JSON.parse(localStorage.getItem('todoList'));
+if (list) {
+  list.forEach((item) => new ToDo(item.description, item.complete));
+}
+
+// Add
+const addInput = document.getElementById('add-input');
+addInput.addEventListener('keydown', add);
+
+const clearButton = document.getElementById('clear-btn');
+clearButton.addEventListener('click', deleteAllCompleted);
+addtoList();
  
