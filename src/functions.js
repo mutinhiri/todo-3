@@ -31,7 +31,7 @@ function addtoList() {
     listItem.innerHTML = `
     <input class="checkbox" type="checkbox">
     <span>${item.description}</span>
-    <textarea class="text-area" maxlength="30">${item.description}</textarea>
+    <p class="text-area">${item.description}</p>
     <button class="cancel-btn">u</button>
     `;
 
@@ -39,7 +39,7 @@ function addtoList() {
 
     const checkbox = listItem.querySelector('input');
     const text = listItem.querySelector('span');
-    const textInput = listItem.querySelector('textarea');
+    const textInput = listItem.querySelector('p');
     const deleteButton = listItem.querySelector('button');
 
     // Update
