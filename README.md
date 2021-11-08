@@ -18,7 +18,7 @@
 - Open terminal
 
 - Clone this project by the command git clone https://github.com/mutinhiri/setup-structure
-- live verion is available on https://mutinhiri.github.io/todo-3/
+- live verion is available on https://mutinhiri.github.io/todo-3/dist
 
 - Open `index.html` in your local browser or using Live Server in Visual Studio Code.
 
